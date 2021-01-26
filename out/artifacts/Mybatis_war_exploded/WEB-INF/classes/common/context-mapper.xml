@@ -9,12 +9,17 @@
        http://www.springframework.org/schema/tx/spring-tx.xsd"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring">
+
     <mybatis:scan base-package="repository"/>
+
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:common/mybatis.xml"/>
+        <property name="mapperLocations" value="classpath*:mappers/*.xml"/>
     </bean>
+
     <tx:annotation-driven proxy-target-class="true"/>
+
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
